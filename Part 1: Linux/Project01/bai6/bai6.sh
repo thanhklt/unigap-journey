@@ -1,9 +1,10 @@
 #!/bin/bash
 
-INP_PATH='../data/preprocess_data.csv'
-OUT_PATH='../cleaned_data/ans_bai6.csv'
+INP_PATH='../data/preprocess_sample3.csv'
+OUT_PATH='./ans_sample3.csv'
 
 # Xu ly director
+echo "Dao dien nhieu phim nhat la: " > "$OUT_PATH"
 awk -F'@@@' '
     BEGIN {
         OFS="|"
@@ -16,15 +17,16 @@ awk -F'@@@' '
             print director, directors[director]
         }
     }
-' $INP_PATH | sort -t'|' -k2,2 -nr | head -n 1 > $OUT_PATH
+' $INP_PATH | sort -t'|' -k2,2 -nr | head -n 1 >> $OUT_PATH
 
 # Xu ly dien vien
+echo "Dien vien dong nhieu phim nhat la: " >> "$OUT_PATH"
 awk -F'@@@' '
     BEGIN {
         OFS="|"
     }
     NR!=1 && $7 != "" {
-        split($7, tmp, ",")
+        split($7, tmp, "|")
         for (i in tmp) {
             gsub(/^ +| +$/, "", tmp[i])
             actors[tmp[i]] += 1
