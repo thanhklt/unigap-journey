@@ -1,0 +1,3 @@
+1/ Nếu script đang chạy tầm 10000 dòng rồi nhưng đột nhiên, bản thân lại muốn chỉnh sửa code thì sao ?
+2/ Giả sử tôi cần chạy 100 batch. Tôi đã chạy 50 batch thì đột nhiên tôi muốn dừng lại. Làm sao để lần chạy tiếp theo bắt đầu từ batch thứ 51 ?
+ 
