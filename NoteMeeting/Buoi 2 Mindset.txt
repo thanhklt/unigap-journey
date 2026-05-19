@@ -1,0 +1,32 @@
+Buoi 2: Mindset
+- Trong 1 buoi hop, cac engineer ngoi canh cac sep, stakeholder
+- Mo ta ve boi canh bai toan
+- Mo ta ve chan dung cua du lieu ( Tu duy du lieu)
+- Dac tinh ve du lieu (PK, co bao nhieu ban ghi, miss o dau, co bo phim nao bi trung khong)
+
+
+// Mindset Tu duy bai toan (Làm đầu tiên)
+Moi bai toan: Phai co survey ban dau ve du lieu
++ Du lieu gi
++ Co cac thong tin gi
++ Volume bao nhieu
++ PK, co bao nhieu ban ghi, miss o dau, co bo phim nao bi trung khong)
++ Co dac tinh gi
+
+// Mindset Lam the nao de anh tin duoc ket qua cua bon em lam la dung ? Cross check, khi ra 1 co so thi co gang hoi nguoi khac để xem kết quả ntn. Mõi người làm 1 session khác nhau nhưng tất cả đều đang giải quyết 1 bài toán
++ Giải thích:
+  - Cách giải quyết
+  - Validation dữ lieu
+
+Dữ lieu lớn thì chắc chắn sẽ có sai số.
++ He thong tha sai thi sai het, chu nua nac nua mo thi phai valid va sua lai
+
+//Tư duy xử lý:
+*Làm việc trên dữ lieu lớn thì phải test trên các sample ? Làm sao cho dung đã
+*Đã làm dữ lieu thì cái tối quan trọng là data-first. neu loi thi bo qua (try-catch) cu chay hết đã (nếu chỉ lõi vài dòng mà ngồi xử lý 3 ngày thì tệ)
+*Tiền xử lý dữ lieu trước
+*Make it run:(lam roi moi hoc) Phải làm cho nó chạy. Chưa hiểu cứ làm đi(sample 1), các sample sau cứ từ từ config, rồi bổ sung lý thuyết để hiểu tại sao nó chạy
+*Đưa các yêu cầu về bài toán C/M (có khả thi ko ?): data có giải quyết đc y/c ko ? Hỏng ? Lỡ không làm đc là mất 2 tuần ( nghĩa ra sau 2 ngày là biết rồi). Vứt vào xcel xem nó có lỗi không
+
+Công thức:
+Mindset > Skillset > Toolset
