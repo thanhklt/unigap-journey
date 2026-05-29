@@ -1,0 +1,30 @@
+
+- 3,3 phút cho 1 lô 1000 sản phẩm
+- Sự đánh đổi giữa việc đọc lô mới nhất v.s thời gian tái tạo lại danh sách sp
+
+
+Giải pháp 1: Cơ chế bỏ qua theo từng Batch (Batch-based Checkpointing)
+Đây là giải pháp đơn giản nhất và tận dụng tối đa cấu trúc code hiện tại của bạn.
+
+Cách hoạt động:
+Khi script khởi động và duyệt qua các batch, trước khi gọi process_batch cho batch_index, chương trình sẽ kiểm tra xem file data/json/{batch_index}.json đã tồn tại chưa và có phải là file JSON hợp lệ không.
+Nếu file đã tồn tại và hợp lệ (không bị lỗi cú pháp JSON), chương trình sẽ bỏ qua (skip) batch đó và tiếp tục duyệt batch tiếp theo.
+Nếu file chưa tồn tại hoặc bị lỗi/rỗng (do lần chạy trước bị ngắt giữa chừng khi đang ghi file), chương trình sẽ tiến hành gọi API và ghi đè/tạo mới file JSON đó.
+Ưu điểm:
+Cực kỳ đơn giản: Chỉ cần thêm một bước kiểm tra file tồn tại và parse thử JSON trước khi xử lý batch.
+Giữ nguyên cấu trúc: Không cần thay đổi cách lưu trữ hay định dạng dữ liệu đầu ra.
+Tốc độ khởi động nhanh: Duyệt qua danh sách file chỉ mất chưa đầy 0.1 giây.
+Nhược điểm:
+Độ mịn ở cấp độ batch (1,000 sản phẩm). Nếu hệ thống bị sập giữa chừng khi đang xử lý batch thứ 79 (ví dụ đã gọi được 500/1000 sản phẩm), thì khi chạy lại, toàn bộ 1000 sản phẩm của batch 79 sẽ được gọi lại từ đầu.
+Giải pháp 2: Cơ chế bỏ qua theo từng sản phẩm (Product-level Checkpointing)
+Giải pháp này đảm bảo không bao giờ gọi lại một API nào đã thành công trước đó, nhưng yêu cầu thay đổi cách lưu trữ dữ liệu.
+
+Cách hoạt động:
+Thay vì lưu thành nhiều file JSON riêng lẻ, chúng ta chuyển sang ghi dữ liệu theo định dạng JSON Lines (JSONL) (mỗi dòng là một JSON object của một sản phẩm) vào một file duy nhất hoặc append liên tục.
+Khi khởi động, script sẽ đọc file JSONL này (nếu có) để lấy danh sách tất cả các product_id đã được xử lý thành công và đưa vào một set trong bộ nhớ (processed_ids).
+Khi đọc danh sách sản phẩm từ file CSV đầu vào, chương trình sẽ lọc bỏ những product_id đã có trong processed_ids trước khi đưa vào batch xử lý.
+Ưu điểm:
+Độ mịn tuyệt đối: Tiết kiệm tối đa số lượng API call, không bao giờ gọi trùng lặp sản phẩm đã xử lý thành công.
+Nhược điểm:
+Cần thay đổi cấu trúc lưu trữ từ nhiều file JSON sang định dạng JSONL (hoặc SQLite).
+Tốn thêm một chút thời gian khởi động để đọc và tải danh sách ID đã xử lý vào bộ nhớ (khoảng vài giây với 200k bản ghi).
