@@ -6,6 +6,8 @@ LOG_ERROR_PATH: "logs/error.log"
 
 LIST_PRODUCT_PATH: "data/products-0-200000.csv"
 JSON_PATH: "data/json/"
+SEED_DIR: "data/seed/"
+STATUS_FILE_PATH: "data/current_status.json"
 
 ENDPOINT: "https://api.tiki.vn/product-detail/api/v1/products/"
 KEY_DATA:

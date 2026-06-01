@@ -28,3 +28,7 @@ Khi đọc danh sách sản phẩm từ file CSV đầu vào, chương trình s�
 Nhược điểm:
 Cần thay đổi cấu trúc lưu trữ từ nhiều file JSON sang định dạng JSONL (hoặc SQLite).
 Tốn thêm một chút thời gian khởi động để đọc và tải danh sách ID đã xử lý vào bộ nhớ (khoảng vài giây với 200k bản ghi).
+
+
+Duyệt qua từng lô ( ứng với duyệt qua từng file trong seed/ ). Trong thư mục data có file current_status.json dùng để lưu trạng thái hiện tại của script chạy đến lô thứ mấy và thời gian chạy. Tác dụng của
+file này là để khi chương trình lỗi sẽ không cần đọc hết lô mà chỉ cần kiểm tra file json này và chạy tiếp.
