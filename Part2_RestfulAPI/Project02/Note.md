@@ -32,3 +32,7 @@ Tốn thêm một chút thời gian khởi động để đọc và tải danh s
 
 Duyệt qua từng lô ( ứng với duyệt qua từng file trong seed/ ). Trong thư mục data có file current_status.json dùng để lưu trạng thái hiện tại của script chạy đến lô thứ mấy và thời gian chạy. Tác dụng của
 file này là để khi chương trình lỗi sẽ không cần đọc hết lô mà chỉ cần kiểm tra file json này và chạy tiếp.
+
+2026-06-01 21:49:26,114 - ERROR - Xử lý thất bại product id: 181218475 - HTTPSConnectionPool(host='api.tiki.vn', port=443): Max retries exceeded with url: /product-detail/api/v1/products/181218475 (Caused by NewConnectionError("HTTPSConnection(host='api.tiki.vn', port=443): Failed to establish a new connection: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted"))
+2026-06-02 16:02:28,910 - ERROR - Xử lý thất bại product id: 136545419 - HTTPSConnectionPool(host='api.tiki.vn', port=443): Read timed out. (read timeout=10)
+2026-06-02 18:14:23,128 - ERROR - Product id 197655754 trả về status code 500
