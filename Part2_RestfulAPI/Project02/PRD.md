@@ -91,17 +91,17 @@ Xây dựng một hệ thống cào dữ liệu (crawler) dạng CLI chạy đ�
 ### 5.1. Mô hình luồng dữ liệu xử lý (Data Flow)
 ```mermaid
 graph TD
-    A[Start Script] --> B[Đọc data/current_status.json]
-    B --> C[Xác định lô cần chạy tiếp: pending_batches]
-    C --> D{Còn lô cần xử lý?}
-    D -- Không --> E[Kết thúc chương trình]
-    D -- Có --> F[Đọc danh sách Product ID từ data/seed/{batch_index}.csv]
-    F --> G[Khởi tạo ThreadPoolExecutor]
-    G --> H[Gửi request API Tiki song song cho từng ID]
-    H --> I[Nhận dữ liệu & Làm sạch HTML mô tả bằng BeautifulSoup]
-    I --> J[Tập hợp kết quả của lô]
-    J --> K[Ghi đè file JSON lô: data/json/{batch_index}.json]
-    K --> L[Tính tổng thời gian & cập nhật data/current_status.json]
+    A["Start Script"] --> B["Đọc data/current_status.json"]
+    B --> C["Xác định lô cần chạy tiếp: pending_batches"]
+    C --> D{"Còn lô cần xử lý?"}
+    D -- "Không" --> E["Kết thúc chương trình"]
+    D -- "Có" --> F["Đọc danh sách Product ID từ data/seed/{batch_index}.csv"]
+    F --> G["Khởi tạo ThreadPoolExecutor"]
+    G --> H["Gửi request API Tiki song song cho từng ID"]
+    H --> I["Nhận dữ liệu & Làm sạch HTML mô tả bằng BeautifulSoup"]
+    I --> J["Tập hợp kết quả của lô"]
+    J --> K["Ghi đè file JSON lô: data/json/{batch_index}.json"]
+    K --> L["Tính tổng thời gian & cập nhật data/current_status.json"]
     L --> D
 ```
 
